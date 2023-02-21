@@ -18,10 +18,10 @@ class postsTableSeeder extends Seeder
     {
         for ($i = 0; $i < 50; $i++) {
             $newPost = new Post();
+            $newPost->author = $faker->word();
             $newPost->title = $faker->sentence(5);
             $newPost->content = $faker->text(3000);
             $newPost->topic = $faker->sentence(3);
-            $newPost->author = $faker->word();
             $newPost->post_date = $faker->dateTimeBetween('-1 year', 'today');
             $newPost->save();
         }
