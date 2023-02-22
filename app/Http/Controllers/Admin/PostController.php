@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -73,24 +74,36 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->validate([
+            'title' => ['required', Rule::unique('posts')->ignore($post->id)],
+            'content' => 'required|string|min:2|max:500',
+            'topic' => 'required|string|min:2|max:100',
+        ]);
+
+        $post->title = $data['title'];
+        $post->content = $data['content'];
+        $post->topic = $data['topic'];
+
+        $post->post_date = now();
+        $post->save();
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
