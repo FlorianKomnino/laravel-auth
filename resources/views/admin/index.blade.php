@@ -4,7 +4,7 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
-            <a href="{{route('posts.create')}}" class="btn btn-success">
+            <a href="{{route('admin.posts.create')}}" class="btn btn-success">
                 Create new Post
             </a>
         </div>
@@ -32,7 +32,7 @@
                             <td>{{ $post->topic }}</td>
                             <td>
                                 <div class="actionButtons d-flex">
-                                    <a href="{{route('posts.index')}}" class="btn btn-sm btn-primary">Show</a>
+                                    <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-sm btn-primary">Show</a>
                                     <a href="" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="" class="btn btn-sm btn-danger">Delete</a>
                                 </div>

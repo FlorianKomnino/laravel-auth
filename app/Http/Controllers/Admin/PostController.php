@@ -49,28 +49,25 @@ class PostController extends Controller
 
         $newPost->fill($data);
 
-
         // $newPost->title = $data['title'];
         // $newPost->content = $data['content'];
         // $newPost->topic = $data['topic'];
 
-
-
         $newPost->author = Auth::user()->name;
         $newPost->post_date = now();
         $newPost->save();
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('admin.show', compact('post'));
     }
 
     /**
