@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class PostController extends Controller
 {
@@ -38,7 +40,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'postTitle' => 'required|unique:posts|string|min:2|max:255',
+            'postContent' => 'required|string|min:2|max:500',
+            'postTopic' => 'required|string|min:2|max:100',
+        ]);
+        $newPost = new Post;
+        $newPost['author'] = Auth::user('name');
+        $newPost['post_date'] = now();
+
+        return redirect()->route('posts.index');
     }
 
     /**
