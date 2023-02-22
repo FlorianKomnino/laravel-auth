@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -31,6 +32,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('posts', PostController::class);
+});
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('projects', ProjectController::class);
 });
 
 require __DIR__ . '/auth.php';

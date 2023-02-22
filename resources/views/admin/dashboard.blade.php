@@ -22,7 +22,7 @@
 
                 
                 <div class="card-body">
-                    <a href="{{route('admin.posts.index')}}">
+                    <a href="{{route('admin.projects.index')}}">
                         Get to the posts
                     </a>
                 </div>

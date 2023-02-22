@@ -13,22 +13,22 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('admin.posts.update', $post->id)}}" method="POST">
+            <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
-                <label for="postTitle" class="form-label">postTitle</label>
-                <input type="text" class="form-control" id="postTitle" name="title" value="{{$post->title}}">
+                <label for="projectTitle" class="form-label">Project Title</label>
+                <input type="text" class="form-control" id="projectTitle" name="title" value="{{$project->title}}">
             </div>
             
             <div class="mb-3">
-                <label for="postContent" class="form-label">Content</label>
-                <textarea class="w-100" id="postContent" name="content" maxlength="500" rows="8">{{$post->content}}</textarea>
+                <label for="projectContent" class="form-label">Content</label>
+                <textarea class="w-100" id="projectContent" name="content" maxlength="500" rows="8">{{$project->content}}</textarea>
             </div>
             
             <div class="mb-3">
-                <label for="postTopic" class="form-label">Topic</label>
-                <input type="text" class="form-control" id="postTopic" name="topic" value="{{$post->topic}}">
+                <label for="projectTopic" class="form-label">Topic</label>
+                <input type="text" class="form-control" id="projectTopic" name="topic" value="{{$project->topic}}">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

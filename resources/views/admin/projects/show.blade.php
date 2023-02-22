@@ -6,22 +6,22 @@
         <div class="col-12">
             <div class="card text-center">
                 <div class="card-header">
-                    {{$post->title}}
+                    {{$project->title}}
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        {{$post->content}}
+                        {{$project->content}}
                     </div>
                 </div>
                 <div class="card-footer text-start">
                     <div class="postTopic">
-                        Topic: {{$post->topic}}
+                        Topic: {{$project->topic}}
                     </div>
                     <div class="postDate">
-                        Creation time: {{$post->post_date}}
+                        Creation time: {{$project->post_date}}
                     </div>
                     <div class="postAuthor">
-                        Post author: {{$post->author}}
+                        Post author: {{$project->author}}
                     </div>
                 </div>
             </div>

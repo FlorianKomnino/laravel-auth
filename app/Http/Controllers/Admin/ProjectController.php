@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Admin\Project as Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
-class PostController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $projects = Project::paginate(15);
 
-        return view('admin.index', [
-            'posts' => DB::table('posts')->paginate(15)
+        return view('admin.projects.index', [
+            'projects' => $projects
         ]);
     }
 
@@ -33,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.projects.create');
     }
 
     /**
@@ -49,75 +49,75 @@ class PostController extends Controller
             'content' => 'required|string|min:2|max:500',
             'topic' => 'required|string|min:2|max:100',
         ]);
-        $newPost = new Post;
+        $newProject = new Project;
 
-        $newPost->fill($data);
+        $newProject->fill($data);
 
         // $newPost->title = $data['title'];
         // $newPost->content = $data['content'];
         // $newPost->topic = $data['topic'];
 
-        $newPost->author = Auth::user()->name;
-        $newPost->post_date = now();
-        $newPost->save();
-        return redirect()->route('admin.posts.index');
+        $newProject->author = Auth::user()->name;
+        $newProject->post_date = now();
+        $newProject->save();
+        return redirect()->route('admin.projects.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Post $post
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Project $project)
     {
-        return view('admin.show', compact('post'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Post $post
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Project $project)
     {
-        return view('admin.edit', compact('post'));
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Post $post
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Project $project)
     {
         $data = $request->validate([
-            'title' => ['required', Rule::unique('posts')->ignore($post->id)],
+            'title' => ['required', Rule::unique('projects')->ignore($project->id)],
             'content' => 'required|string|min:2|max:500',
             'topic' => 'required|string|min:2|max:100',
         ]);
 
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->topic = $data['topic'];
+        $project->title = $data['title'];
+        $project->content = $data['content'];
+        $project->topic = $data['topic'];
 
-        $post->post_date = now();
-        $post->save();
-        return redirect()->route('admin.posts.show', $post->id);
+        $project->post_date = now();
+        $project->save();
+        return redirect()->route('admin.projects.show', $project->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Post $post
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Project $project)
     {
-        $post->delete();
-        return redirect()->route('admin.posts.index');
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }
