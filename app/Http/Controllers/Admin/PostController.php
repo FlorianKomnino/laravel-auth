@@ -41,14 +41,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'postTitle' => 'required|unique:posts|string|min:2|max:255',
-            'postContent' => 'required|string|min:2|max:500',
-            'postTopic' => 'required|string|min:2|max:100',
+            'title' => 'required|unique:posts|string|min:2|max:255',
+            'content' => 'required|string|min:2|max:500',
+            'topic' => 'required|string|min:2|max:100',
         ]);
         $newPost = new Post;
         $newPost['author'] = Auth::user('name');
         $newPost['post_date'] = now();
-
+        $newPost->save();
         return redirect()->route('posts.index');
     }
 

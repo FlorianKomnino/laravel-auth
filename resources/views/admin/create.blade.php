@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12 pt-4">
             @if ($errors->any())
-                <div class="errors_container mb-4">
+                <div class="errors_container mb-4 alert alert-warning">
                     <ul>
                         @foreach ($errors->all() as $singleError)
                             <li>
@@ -25,17 +25,17 @@
             
             <div class="mb-3">
                 <label for="postTitle" class="form-label">postTitle</label>
-                <input type="text" class="form-control" id="postTitle" name="postTitle">
-            </div>
-            
-            <div class="mb-3">
-                <label for="postAuthor" class="form-label">Author</label>
-                <input type="text" class="form-control" id="postAuthor" name="postAuthor" value="{{Auth::user()->name}}" disabled>
+                <input type="text" class="form-control" id="postTitle" name="title">
             </div>
             
             <div class="mb-3">
                 <label for="postContent" class="form-label">Content</label>
-                <textarea class="w-100" name="" id="postContent" name="postContent" maxlength="500" rows="8"></textarea>
+                <textarea class="w-100" id="postContent" name="content" maxlength="500" rows="8"></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label for="postTopic" class="form-label">Topic</label>
+                <input type="text" class="form-control" id="postTopic" name="topic">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
