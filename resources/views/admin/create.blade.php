@@ -8,7 +8,18 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 pt-4">
+            @if ($errors->any())
+                <div class="errors_container mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $singleError)
+                            <li>
+                                {{$singleError}}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{route('posts.store')}}" method="POST">
             @csrf
             
@@ -25,16 +36,6 @@
             <div class="mb-3">
                 <label for="postContent" class="form-label">Content</label>
                 <textarea class="w-100" name="" id="postContent" name="postContent" maxlength="500" rows="8"></textarea>
-            </div>
-            
-            <div class="mb-3">
-                <label for="postTopic" class="form-label">Post topic</label>
-                <input type="text" class="form-control" id="postTopic" name="postTopic">
-            </div>
-            
-            <div class="mb-3">
-                <label for="postDate" class="form-label">Post date</label>
-                <input type="text" class="form-control" id="postDate" name="postDate" disabled value="{{now('+1 hour')}}">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
