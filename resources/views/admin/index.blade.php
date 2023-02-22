@@ -4,6 +4,11 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
+            <a href="{{route('posts.create')}}" class="btn btn-success">
+                Create new Post
+            </a>
+        </div>
+        <div class="col-12">
             <table class="table">
                 <thead>
                     <tr>
@@ -25,10 +30,12 @@
                             <td>{{ $post->content }}</td>
                             <td>{{ $post->post_date }}</td>
                             <td>{{ $post->topic }}</td>
-                            <td class="d-flex">
-                                <a href="" class="btn btn-sm btn-primary">Show</a>
-                                <a href="" class="btn btn-sm btn-warning">Edit</a>
-                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                            <td>
+                                <div class="actionButtons d-flex">
+                                    <a href="{{route('posts.index')}}" class="btn btn-sm btn-primary">Show</a>
+                                    <a href="" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                </div>
                             </td>
 
                         </tr>
