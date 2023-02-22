@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
@@ -20,7 +21,9 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return view('admin.index', compact('posts'));
+        return view('admin.index', [
+            'posts' => DB::table('posts')->paginate(15)
+        ]);
     }
 
     /**
