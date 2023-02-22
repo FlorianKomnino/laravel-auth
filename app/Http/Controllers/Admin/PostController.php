@@ -46,9 +46,16 @@ class PostController extends Controller
             'topic' => 'required|string|min:2|max:100',
         ]);
         $newPost = new Post;
-        $newPost->title = $data['title'];
-        $newPost->content = $data['content'];
-        $newPost->topic = $data['topic'];
+
+        $newPost->fill($data);
+
+
+        // $newPost->title = $data['title'];
+        // $newPost->content = $data['content'];
+        // $newPost->topic = $data['topic'];
+
+
+
         $newPost->author = Auth::user()->name;
         $newPost->post_date = now();
         $newPost->save();
