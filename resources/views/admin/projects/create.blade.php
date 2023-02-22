@@ -1,8 +1,3 @@
-@php
-    use Illuminate\Support\Carbon;
-@endphp
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -20,22 +15,22 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('posts.store')}}" method="POST">
+            <form action="{{route('admin.projects.store')}}" method="POST">
             @csrf
             
             <div class="mb-3">
-                <label for="postTitle" class="form-label">postTitle</label>
-                <input type="text" class="form-control" id="postTitle" name="title">
+                <label for="projectTitle" class="form-label">Project Title</label>
+                <input type="text" class="form-control" id="projectTitle" name="title">
             </div>
             
             <div class="mb-3">
-                <label for="postContent" class="form-label">Content</label>
-                <textarea class="w-100" id="postContent" name="content" maxlength="500" rows="8"></textarea>
+                <label for="projectContent" class="form-label">Content</label>
+                <textarea class="w-100" id="projectContent" name="content" maxlength="500" rows="8"></textarea>
             </div>
             
             <div class="mb-3">
-                <label for="postTopic" class="form-label">Topic</label>
-                <input type="text" class="form-control" id="postTopic" name="topic">
+                <label for="projectTopic" class="form-label">Topic</label>
+                <input type="text" class="form-control" id="projectTopic" name="topic">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

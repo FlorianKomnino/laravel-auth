@@ -45,7 +45,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|unique:posts|string|min:2|max:255',
+            'title' => 'required|unique:projects|string|min:2|max:255',
             'content' => 'required|string|min:2|max:500',
             'topic' => 'required|string|min:2|max:100',
         ]);
@@ -58,7 +58,7 @@ class ProjectController extends Controller
         // $newPost->topic = $data['topic'];
 
         $newProject->author = Auth::user()->name;
-        $newProject->post_date = now();
+        $newProject->project_date = now();
         $newProject->save();
         return redirect()->route('admin.projects.index');
     }
@@ -104,7 +104,7 @@ class ProjectController extends Controller
         $project->content = $data['content'];
         $project->topic = $data['topic'];
 
-        $project->post_date = now();
+        $project->project_date = now();
         $project->save();
         return redirect()->route('admin.projects.show', $project->id);
     }

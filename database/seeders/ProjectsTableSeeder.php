@@ -22,7 +22,7 @@ class ProjectsTableSeeder extends Seeder
             $newProject->title = $faker->sentence(5);
             $newProject->content = $faker->text(500);
             $newProject->topic = $faker->sentence(3);
-            $newProject->post_date = $faker->dateTimeBetween('-1 year', 'today');
+            $newProject->project_date = $faker->dateTimeBetween('-1 year', 'today');
             $newProject->save();
         }
     }

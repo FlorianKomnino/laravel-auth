@@ -18,10 +18,10 @@
                         Topic: {{$project->topic}}
                     </div>
                     <div class="postDate">
-                        Creation time: {{$project->post_date}}
+                        Creation time: {{$project->project_date}}
                     </div>
                     <div class="postAuthor">
-                        Post author: {{$project->author}}
+                        Project author: {{$project->author}}
                     </div>
                 </div>
             </div>

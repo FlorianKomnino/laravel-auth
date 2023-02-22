@@ -16,7 +16,7 @@
                         <th scope="col">title</th>
                         <th scope="col">author</th>
                         <th scope="col">content</th>
-                        <th scope="col">post_date</th>
+                        <th scope="col">project_date</th>
                         <th scope="col">topic</th>
                         <th scope="col">actions</th>
                     </tr>
@@ -28,7 +28,7 @@
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->author }}</td>
                             <td>{{ $project->content }}</td>
-                            <td>{{ $project->post_date }}</td>
+                            <td>{{ $project->project_date }}</td>
                             <td>{{ $project->topic }}</td>
                             <td>
                                 <div class="actionButtons d-flex">
