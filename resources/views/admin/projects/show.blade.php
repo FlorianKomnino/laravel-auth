@@ -8,6 +8,10 @@
                 <div class="card-header">
                     {{$project->title}}
                 </div>
+
+                <div class="card-image mt-3">
+                    <img src="{{ asset('storage/' . $project->image) }}" alt="Project image" class="img-fluid">
+                </div>
                 <div class="card-body">
                     <div class="card-text">
                         {{$project->content}}

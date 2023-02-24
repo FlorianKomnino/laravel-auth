@@ -12,5 +12,5 @@ class Project extends Model
 
     use SoftDeletes;
 
-    protected $fillable = array('title', 'content', 'topic');
+    protected $fillable = array('title', 'content', 'topic', 'image');
 }

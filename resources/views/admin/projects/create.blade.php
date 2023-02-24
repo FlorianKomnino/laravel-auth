@@ -15,7 +15,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('admin.projects.store')}}" method="POST">
+            <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             
             <div class="mb-3">
@@ -31,6 +31,11 @@
             <div class="mb-3">
                 <label for="projectTopic" class="form-label">Topic</label>
                 <input type="text" class="form-control" id="projectTopic" name="topic">
+            </div>
+
+            <div class="mb-3">
+                <label for="project_image" class="form-label">Content</label>
+                <input type="file" class="w-100" id="project_image" name="image">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

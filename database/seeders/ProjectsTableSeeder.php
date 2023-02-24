@@ -6,6 +6,7 @@ use App\Models\Admin\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectsTableSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class ProjectsTableSeeder extends Seeder
             $newProject->content = $faker->text(500);
             $newProject->topic = $faker->sentence(3);
             $newProject->project_date = $faker->dateTimeBetween('-1 year', 'today');
+            $newProject->image = 'exampleImg.jpeg';
             $newProject->save();
         }
     }
