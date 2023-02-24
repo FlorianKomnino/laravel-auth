@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -48,7 +49,9 @@ class ProjectController extends Controller
             'title' => 'required|unique:projects|string|min:2|max:255',
             'content' => 'required|string|min:2|max:500',
             'topic' => 'required|string|min:2|max:100',
+            'image' => 'required|image|max:256'
         ]);
+        $data['image'] = Storage::put('imgs', $data['image']);
         $newProject = new Project;
 
         $newProject->fill($data);
