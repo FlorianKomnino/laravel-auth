@@ -51,7 +51,7 @@ class ProjectController extends Controller
             'topic' => 'required|string|min:2|max:100',
             'image' => 'required|image|max:256'
         ]);
-        $data['image'] = Storage::put('/', $data['image']);
+        $data['image'] = Storage::put('/imgs', $data['image']);
         $newProject = new Project;
 
         $newProject->fill($data);
