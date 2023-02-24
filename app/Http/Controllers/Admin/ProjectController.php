@@ -101,10 +101,13 @@ class ProjectController extends Controller
             'title' => ['required', Rule::unique('projects')->ignore($project->id)],
             'content' => 'required|string|min:2|max:500',
             'topic' => 'required|string|min:2|max:100',
+            'image' => 'required|image|max:256'
         ]);
+        $data['image'] = Storage::put('/imgs', $data['image']);
 
         $project->title = $data['title'];
         $project->content = $data['content'];
+        $project->image = $data['image'];
         $project->topic = $data['topic'];
 
         $project->project_date = now();
