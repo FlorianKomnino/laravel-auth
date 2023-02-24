@@ -24,6 +24,22 @@
                         Project author: {{$project->author}}
                     </div>
                 </div>
+
+            </div>
+            <div class="homeButtonContainer text-center mt-5">
+                <a href="{{route('admin.projects.index')}}" class="btn btn-sm btn-primary">Back to the list</a>
+            </div>
+            <div class="homeButtonContainer text-center mt-2">
+                <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-sm btn-warning">Edit</a>
+            </div>
+            <div class="homeButtonContainer text-center mt-2">
+                <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
             </div>
         </div>
     </div>
