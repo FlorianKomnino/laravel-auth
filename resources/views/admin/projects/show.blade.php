@@ -10,7 +10,11 @@
                 </div>
 
                 <div class="card-image mt-3">
-                    <img src="{{ asset('storage/' . $project->image) }}" alt="Project image" class="img-fluid">
+                    @if ( str_starts_with($project->image, 'http'))
+                        <img src="{{ $project->image }}" alt="Project image" class="img-fluid">
+                    @else
+                        <img src="{{ asset('storage/' . $project->image) }}" alt="Project image" class="img-fluid">
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="card-text">

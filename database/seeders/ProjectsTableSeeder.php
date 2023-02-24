@@ -24,7 +24,7 @@ class ProjectsTableSeeder extends Seeder
             $newProject->content = $faker->text(500);
             $newProject->topic = $faker->sentence(3);
             $newProject->project_date = $faker->dateTimeBetween('-1 year', 'today');
-            $newProject->image = 'imgs/exampleImg.jpeg';
+            $newProject->image = $faker->unique()->imageUrl();
             $newProject->save();
         }
     }
