@@ -37,6 +37,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
+            
             <a href="{{route('admin.projects.index')}}" class="btn btn-danger me-auto">Quit edit</a>
             </form>
         </div>

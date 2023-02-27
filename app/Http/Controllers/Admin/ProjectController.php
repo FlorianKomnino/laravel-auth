@@ -13,6 +13,29 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+
+    protected $validationRules = [
+        'title' => 'required|unique:projects|string|min:2|max:255',
+        'content' => 'required|string|min:2|max:500',
+        'topic' => 'required|string|min:2|max:100',
+        'image' => 'required|image|max:256'
+    ];
+
+    protected $validationErrorMessages = [
+        'title.required' => 'Il titolo è richiesto.',
+        'title.unique' => 'Il titolo non può essere uguale ad un altro titolo in archivio.',
+        'title.min' => 'Il titolo deve essere lungo almeno 2 caratteri.',
+        'title.max' => 'Il titolo non può superare i 255 caratteri.',
+
+        'content.required' => 'Il contenuto è richiesto.',
+        'content.min' => 'Il contenuto deve essere lungo almeno 2 caratteri.',
+        'content.max' => 'Il contenuto non può superare i 500 caratteri.',
+
+        'topic.required' => 'L\'argomento è richiesto.',
+        'topic.image' => 'L\'argomento deve essere lungo almeno 2 caratteri.',
+        'topic.max' => 'L\'argomento non può superare i 100 caratteri.',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -45,25 +68,44 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required|unique:projects|string|min:2|max:255',
-            'content' => 'required|string|min:2|max:500',
-            'topic' => 'required|string|min:2|max:100',
-            'image' => 'required|image|max:256'
-        ]);
-        $data['image'] = Storage::put('/imgs', $data['image']);
+        $data = $request->validate(
+            [
+                'title' => 'required|unique:projects|string|min:2|max:255',
+                'content' => 'required|string|min:2|max:500',
+                'topic' => 'required|string|min:2|max:100',
+                'image' => 'required|image|max:256'
+            ],
+            [
+                'title.required' => 'Il titolo è necessario.',
+                'title.unique' => 'Il titolo non può essere uguale ad un altro titolo in archivio.',
+                'title.min' => 'Il titolo deve essere lungo almeno 2 caratteri.',
+                'title.max' => 'Il titolo non può superare i 255 caratteri.',
+
+                'content.required' => 'Il contenuto è necessario.',
+                'content.min' => 'Il contenuto deve essere lungo almeno 2 caratteri.',
+                'content.max' => 'Il contenuto non può superare i 500 caratteri.',
+
+                'topic.required' => 'L\'argomento è necessario.',
+                'topic.image' => 'L\'argomento deve essere lungo almeno 2 caratteri.',
+                'topic.max' => 'L\'argomento non può superare i 100 caratteri.',
+
+                'image.required' => 'L\'immagine è necessaria.',
+                'image.image' => 'Il file caricato deve essere un\'immagine.',
+                'image.max' => 'L\'immagine è troppo grande. (max: 256kb)',
+            ]
+        );
+
+        // if ($request->hasFile('image')) {
+        //     $data['image'] =  Storage::put('imgs/', $data['image']);
+        // }
+        $data['image'] =  Storage::put('imgs/', $data['image']);
+
         $newProject = new Project;
-
-        $newProject->fill($data);
-
-        // $newPost->title = $data['title'];
-        // $newPost->content = $data['content'];
-        // $newPost->topic = $data['topic'];
-
         $newProject->author = Auth::user()->name;
         $newProject->project_date = now();
+        $newProject->fill($data);
         $newProject->save();
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', "Il progetto '$newProject->title', è stato creato con successo.")->with('message_class', 'success');
     }
 
     /**
@@ -102,6 +144,19 @@ class ProjectController extends Controller
             'content' => 'required|string|min:2|max:500',
             'topic' => 'required|string|min:2|max:100',
             'image' => 'required|image|max:256'
+        ], [
+            'title.required' => 'Il titolo è richiesto.',
+            'title.unique' => 'Il titolo non può essere uguale ad un altro titolo in archivio.',
+            'title.min' => 'Il titolo deve essere lungo almeno 2 caratteri.',
+            'title.max' => 'Il titolo non può superare i 255 caratteri.',
+
+            'content.required' => 'Il contenuto è richiesto.',
+            'content.min' => 'Il contenuto deve essere lungo almeno 2 caratteri.',
+            'content.max' => 'Il contenuto non può superare i 500 caratteri.',
+
+            'topic.required' => 'L\'argomento è richiesto.',
+            'topic.image' => 'L\'argomento deve essere lungo almeno 2 caratteri.',
+            'topic.max' => 'L\'argomento non può superare i 100 caratteri.',
         ]);
         $data['image'] = Storage::put('/imgs', $data['image']);
 
